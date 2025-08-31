@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 
-def validate_book_data(title: str = None, author: str = None):
+def validate_book_data(title: str = None, author: str = None, price: float = None, genre: str = None):
     """Validate book data and raise HTTPException if invalid."""
     if title is not None:
         if not title.strip():
@@ -18,7 +18,6 @@ def validate_book_data(title: str = None, author: str = None):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Title must be less than 200 characters."
             )
-    
     if author is not None:
         if not author.strip():
             raise HTTPException(
@@ -34,4 +33,16 @@ def validate_book_data(title: str = None, author: str = None):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Author name must be less than 100 characters."
+            )
+    if price is not None:
+        if price < 0:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Book price must be a non-negative number."
+            )
+    if genre is not None:
+        if not genre.strip():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Book genre cannot be empty."
             )

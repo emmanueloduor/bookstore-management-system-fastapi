@@ -28,11 +28,11 @@ class BookDatabase:
             self._load_default_books()
     
     def _load_default_books(self):
-        """Load default sample books."""
+        """Load default sample books with price and genre."""
         self.books = {
-            1: Book(id=1, title="1984", author="George Orwell"),
-            2: Book(id=2, title="To Kill a Mockingbird", author="Harper Lee"),
-            3: Book(id=3, title="The Great Gatsby", author="F. Scott Fitzgerald")
+            1: Book(id=1, title="1984", author="George Orwell", price=9.99, genre="Dystopian"),
+            2: Book(id=2, title="To Kill a Mockingbird", author="Harper Lee", price=8.99, genre="Classic"),
+            3: Book(id=3, title="The Great Gatsby", author="F. Scott Fitzgerald", price=7.99, genre="Classic")
         }
     
     def save_books(self):

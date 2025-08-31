@@ -62,21 +62,31 @@ async def add_book(book_to_create: BookCreate):
     """Add a new book to the database."""
     # Validation
     validate_book_data(book_to_create.title, book_to_create.author)
-    
+    # Additional validation for price and genre
+    if book_to_create.price is None or book_to_create.price < 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Book price must be a non-negative number."
+        )
+    if not book_to_create.genre or not book_to_create.genre.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Book genre cannot be empty."
+        )
     # Check for duplicates
     if db.book_exists(book_to_create.title, book_to_create.author):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Book '{book_to_create.title}' by {book_to_create.author} already exists."
         )
-    
     new_id = db.get_next_id()
     new_book = Book(
-        id=new_id, 
-        title=book_to_create.title.strip(), 
-        author=book_to_create.author.strip()
+        id=new_id,
+        title=book_to_create.title.strip(),
+        author=book_to_create.author.strip(),
+        price=book_to_create.price,
+        genre=book_to_create.genre.strip()
     )
-    
     return db.add_book(new_book)
 
 @router.put("/books/{book_id}", response_model=Book, tags=["Books"])
@@ -97,25 +107,33 @@ async def update_book(book_id: int, updated_info: BookUpdate):
     
     # Validate update data
     update_data = updated_info.model_dump(exclude_unset=True)
-    
     if 'title' in update_data:
         validate_book_data(update_data['title'], None)
         update_data['title'] = update_data['title'].strip()
-    
     if 'author' in update_data:
         validate_book_data(None, update_data['author'])
         update_data['author'] = update_data['author'].strip()
-    
+    if 'price' in update_data:
+        if update_data['price'] is None or update_data['price'] < 0:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Book price must be a non-negative number."
+            )
+    if 'genre' in update_data:
+        if not update_data['genre'] or not update_data['genre'].strip():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Book genre cannot be empty."
+            )
+        update_data['genre'] = update_data['genre'].strip()
     # Check for duplicates (excluding current book)
     new_title = update_data.get('title', book.title)
     new_author = update_data.get('author', book.author)
-    
     if db.book_exists(new_title, new_author, exclude_id=book_id):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Book '{new_title}' by {new_author} already exists."
         )
-    
     # Create updated book
     updated_book = book.model_copy(update=update_data)
     return db.update_book(book_id, updated_book)
