@@ -41,6 +41,16 @@ function setupEventListeners() {
     });
 }
 
+function sortBooks() {
+    const sortBy = document.getElementById('sortSelect').value;
+    filteredBooks.sort((a, b) => {
+        if (sortBy === 'price') {
+            return (a.price ?? 0) - (b.price ?? 0);
+        }
+        return (a[sortBy] ?? '').toString().localeCompare((b[sortBy] ?? '').toString(), undefined, { sensitivity: 'base' });
+    });
+    renderBooks(filteredBooks);
+}
 function createFloatingAnimation() {
     const shapes = document.querySelectorAll('.shape');
     shapes.forEach((shape, index) => {
@@ -143,20 +153,19 @@ async function handleEditBook(event) {
     const formData = new FormData(event.target);
     const bookData = {
         title: formData.get('title').trim(),
-        author: formData.get('author').trim()
+        author: formData.get('author').trim(),
+        price: parseFloat(formData.get('price')),
+        genre: formData.get('genre').trim()
     };
-
-    if (!bookData.title || !bookData.author) {
+    if (!bookData.title || !bookData.author || isNaN(bookData.price) || !bookData.genre) {
         showStatus('Please fill in all fields', 'error');
         return;
     }
-
     try {
         const updatedBook = await apiRequest(`/books/${currentEditId}`, {
             method: 'PUT',
             body: JSON.stringify(bookData)
         });
-
         const index = allBooks.findIndex(book => book.id === currentEditId);
         if (index !== -1) {
             allBooks[index] = updatedBook;
@@ -164,7 +173,6 @@ async function handleEditBook(event) {
             renderBooks(filteredBooks);
             updateStats();
         }
-
         closeModal();
         showStatus(`"${updatedBook.title}" updated successfully!`, 'success');
     } catch (error) {
@@ -239,6 +247,8 @@ function openEditModal(book) {
     currentEditId = book.id;
     document.getElementById('editTitle').value = book.title;
     document.getElementById('editAuthor').value = book.author;
+    document.getElementById('editPrice').value = book.price;
+    document.getElementById('editGenre').value = book.genre;
     document.getElementById('editModal').style.display = 'block';
 }
 
@@ -266,6 +276,8 @@ function renderBooks(books) {
             <div class="book-id">#${book.id}</div>
             <h4>${escapeHtml(book.title)}</h4>
             <p><strong>Author:</strong> ${escapeHtml(book.author)}</p>
+            <p><strong>Price:</strong> $${book.price?.toFixed(2) ?? '--'}</p>
+            <p><strong>Genre:</strong> ${book.genre ?? '--'}</p>
             <div class="book-actions">
                 <button class="btn btn-secondary" onclick="openEditModal(${JSON.stringify(book).replace(/"/g, '&quot;')})">
                     ✏️ Edit

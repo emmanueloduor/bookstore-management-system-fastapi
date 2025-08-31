@@ -2,26 +2,36 @@
   {
     "id": 1,
     "title": "1984",
-    "author": "George Orwell"
+    "author": "George Orwell",
+    "price": 9.99,
+    "genre": "Dystopian"
   },
   {
     "id": 2,
     "title": "To Kill a Mockingbird",
-    "author": "Harper Lee"
+    "author": "Harper Lee",
+    "price": 8.99,
+    "genre": "Classic"
   },
   {
     "id": 3,
     "title": "The Great Gatsby",
-    "author": "F. Scott Fitzgerald"
+    "author": "F. Scott Fitzgerald",
+    "price": 7.9,
+    "genre": "Classic"
   },
   {
     "id": 5,
     "title": "How to win friends and influence people",
-    "author": "Dale Carnegie"
+    "author": "Dale Carnegie",
+    "price": 10.99,
+    "genre": "Self-help"
   },
   {
     "id": 6,
     "title": "Animal Farm",
-    "author": "George Orwell"
+    "author": "George Orwell",
+    "price": 6.99,
+    "genre": "Political Satire"
   }
 ]

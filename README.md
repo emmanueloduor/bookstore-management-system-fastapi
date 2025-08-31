@@ -4,7 +4,8 @@ This is a simple Bookstore Management System built with FastAPI (Python) for the
 
 ## Features
 
-- List, add, update, and delete books
+- List, add, update, and delete books (with price and genre)
+- Sort book collection by title, author, price, or genre
 - Get random books
 - View collection statistics
 - Interactive API documentation (Swagger UI)
@@ -14,6 +15,7 @@ This is a simple Bookstore Management System built with FastAPI (Python) for the
 
 - Python 3.11+
 - FastAPI
+- Pydantic
 - Uvicorn
 - HTML, CSS, JavaScript (vanilla)
 
@@ -55,6 +57,7 @@ data/
 
 - Static HTML, CSS, and JavaScript files in the `frontend` folder
 - `index.html` is the main entry point
+- Book collection can be sorted by title, author, price, or genre using the sort feature
 
 ---
 
@@ -118,7 +121,9 @@ data/
 POST /books
 {
     "title": "The Pragmatic Programmer",
-    "author": "Andrew Hunt"
+    "author": "Andrew Hunt",
+    "price": 12.99,
+    "genre": "Programming"
 }
 ```
 
@@ -133,7 +138,9 @@ GET /books
 ```http
 PUT /books/1
 {
-    "title": "The Pragmatic Programmer (Updated)"
+    "title": "The Pragmatic Programmer (Updated)",
+    "price": 13.99,
+    "genre": "Software Development"
 }
 ```
 
